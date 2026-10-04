@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ALIMDAR službena provjera certifikata stručnog savjetovanja.">
+  <title>ALIMDAR | Provjera certifikata</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">
+    <img src="/alimdar-logo.png" alt="ALIMDAR logo">
+    <span><b>ALIMDAR</b><small>TECHNOLOGY</small></span>
+  </a>
+  <nav><a href="#provjera">Provjera</a><a href="#kako">Kako radi</a><a href="#kontakt">Kontakt</a></nav>
+  <div class="system"><i></i>Sustav aktivan</div>
+</header>
+
+<main>
+  <section class="hero" id="provjera">
+    <div class="eyebrow">DIGITALNA AUTENTIKACIJA</div>
+    <h1>Provjera <span>certifikata</span></h1>
+    <p>Provjerite vjerodostojnost potvrde o sudjelovanju u stručnom savjetovanju putem jedinstvenog identifikatora.</p>
+
+    <form id="verifyForm" class="verify-card">
+      <div class="card-title"><span class="icon">⌗</span><div><small>JAVNI REGISTAR</small><strong>Unesite Certificate ID</strong></div></div>
+      <label for="certificateId">Certificate ID</label>
+      <div class="search-row">
+        <input id="certificateId" name="id" autocomplete="off" placeholder="npr. ALM-CON-2026-0001"
+               pattern="ALM-CON-[0-9]{4}-[0-9]{4,}" required>
+        <button type="submit">Provjeri <span>→</span></button>
+      </div>
+      <p class="hint">QR kod s izdane potvrde otvara ovu stranicu s pripadajućim Certificate ID-om.</p>
+    </form>
+
+    <section id="result" class="result hidden" aria-live="polite"></section>
+  </section>
+
+  <section class="steps" id="kako">
+    <div class="eyebrow">JEDNOSTAVNO I TRANSPARENTNO</div>
+    <h2>Provjera u tri koraka.</h2>
+    <div class="step-grid">
+      <article><b>01</b><h3>Certificate ID</h3><p>Unesite identifikator ili otvorite poveznicu skeniranjem QR koda.</p></article>
+      <article><b>02</b><h3>Provjera registra</h3><p>Sustav dohvaća javno dopuštene podatke iz registra certifikata.</p></article>
+      <article><b>03</b><h3>Status</h3><p>Prikazuje se status VALID ili REVOKED te dostupni blockchain podaci.</p></article>
+    </div>
+  </section>
+</main>
+
+<footer id="kontakt">
+  <div><b>Uslužni obrt Alimdar</b><br><a href="mailto:alimdarweb3@gmail.com">alimdarweb3@gmail.com</a></div>
+  <div><a href="https://alimdarblog.wordpress.com" rel="noopener noreferrer">alimdarblog.wordpress.com</a></div>
+  <p>Ova potvrda evidentira sudjelovanje navedene osobe u stručnom savjetovanju koje je proveo Uslužni obrt Alimdar. Ne predstavlja javnu ispravu, diplomu, formalnu kvalifikaciju niti dokaz stručne spreme.</p>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
