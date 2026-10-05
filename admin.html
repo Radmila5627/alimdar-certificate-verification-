@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>ALIMDAR — Upravljanje potvrdama</title>
 
   <style>
@@ -47,6 +48,26 @@
       margin-bottom: 25px;
     }
 
+    .security-box {
+      border: 1px solid #7b6933;
+      background: #0c291f;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .security-title {
+      margin: 0 0 5px;
+      color: #d8b85c;
+      font-size: 16px;
+    }
+
+    .security-text {
+      margin: 0 0 12px;
+      color: #82978e;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
     label {
       display: block;
       margin: 18px 0 7px;
@@ -67,6 +88,17 @@
       font-size: 15px;
     }
 
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 1px solid #d8b85c;
+      border-color: #d8b85c;
+    }
+
+    input[readonly] {
+      color: #b9c5bf;
+    }
+
     textarea {
       min-height: 90px;
       resize: vertical;
@@ -76,6 +108,11 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 18px;
+    }
+
+    .section-title {
+      margin-top: 35px;
+      color: #d8b85c;
     }
 
     button {
@@ -93,11 +130,17 @@
       opacity: .9;
     }
 
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
     #message {
       margin-top: 20px;
       padding: 15px;
       display: none;
       border: 1px solid #45675a;
+      line-height: 1.6;
     }
 
     .success {
@@ -144,10 +187,42 @@
 
     <form id="certificateForm">
 
+      <!-- ADMIN AUTORIZACIJA -->
+
+      <div class="security-box">
+
+        <h3 class="security-title">
+          Administratorski pristup
+        </h3>
+
+        <p class="security-text">
+          Unesite privatni administratorski ključ prije spremanja potvrde.
+          Ključ služi samo za autorizaciju i ne sprema se u ALIMDAR registar.
+        </p>
+
+        <label for="adminKey">
+          Administratorski ključ
+        </label>
+
+        <input
+          id="adminKey"
+          type="password"
+          placeholder="Unesite administratorski ključ"
+          autocomplete="off"
+          required
+        >
+
+      </div>
+
+      <!-- CERTIFICATE -->
+
       <div class="grid">
 
         <div>
-          <label>Certificate ID</label>
+          <label for="certificateId">
+            Certificate ID
+          </label>
+
           <input
             id="certificateId"
             placeholder="Automatski će se dodijeliti"
@@ -156,7 +231,10 @@
         </div>
 
         <div>
-          <label>Status</label>
+          <label for="status">
+            Status
+          </label>
+
           <select id="status">
             <option value="PENDING">PENDING</option>
             <option value="VALID">VALID</option>
@@ -166,79 +244,157 @@
 
       </div>
 
-      <label>Ime i prezime</label>
-      <input id="participantName" required>
+      <label for="participantName">
+        Ime i prezime
+      </label>
 
-      <label>Izdavatelj</label>
+      <input
+        id="participantName"
+        required
+      >
+
+      <label for="issuer">
+        Izdavatelj
+      </label>
+
       <input
         id="issuer"
         value="Uslužni obrt Alimdar"
         readonly
       >
 
-      <label>Područje stručnog savjetovanja</label>
-      <textarea id="area" required></textarea>
+      <label for="area">
+        Područje stručnog savjetovanja
+      </label>
 
-      <label>Tema savjetovanja</label>
-      <textarea id="topic" required></textarea>
+      <textarea
+        id="area"
+        required
+      ></textarea>
+
+      <label for="topic">
+        Tema savjetovanja
+      </label>
+
+      <textarea
+        id="topic"
+        required
+      ></textarea>
 
       <div class="grid">
 
         <div>
-          <label>Početak savjetovanja</label>
-          <input id="periodStart" type="date" required>
+
+          <label for="periodStart">
+            Početak savjetovanja
+          </label>
+
+          <input
+            id="periodStart"
+            type="date"
+            required
+          >
+
         </div>
 
         <div>
-          <label>Završetak savjetovanja</label>
-          <input id="periodEnd" type="date" required>
+
+          <label for="periodEnd">
+            Završetak savjetovanja
+          </label>
+
+          <input
+            id="periodEnd"
+            type="date"
+            required
+          >
+
         </div>
 
       </div>
 
-      <label>Trajanje</label>
+      <label for="duration">
+        Trajanje
+      </label>
+
       <input
         id="duration"
         placeholder="npr. 2 sata dnevno prema programu savjetovanja"
       >
 
-      <label>Način održavanja</label>
+      <label for="workFormat">
+        Način održavanja
+      </label>
+
       <input
         id="workFormat"
         placeholder="npr. Rijeka, online i pisani zadaci"
       >
 
-      <label>Datum izdavanja</label>
-      <input id="issueDate" type="date">
+      <label for="issueDate">
+        Datum izdavanja
+      </label>
 
-      <h3 style="margin-top:35px;color:#d8b85c;">
+      <input
+        id="issueDate"
+        type="date"
+      >
+
+      <!-- BLOCKCHAIN -->
+
+      <h3 class="section-title">
         Blockchain podaci
       </h3>
 
       <div class="grid">
 
         <div>
-          <label>Network</label>
+
+          <label for="blockchainNetwork">
+            Network
+          </label>
+
           <input
             id="blockchainNetwork"
             placeholder="npr. Polygon"
           >
+
         </div>
 
         <div>
-          <label>Token ID</label>
-          <input id="tokenId">
+
+          <label for="tokenId">
+            Token ID
+          </label>
+
+          <input
+            id="tokenId"
+          >
+
         </div>
 
       </div>
 
-      <label>Contract Address</label>
-      <input id="contractAddress">
+      <label for="contractAddress">
+        Contract Address
+      </label>
 
-      <label>Transaction Hash</label>
-      <input id="transactionHash">
+      <input
+        id="contractAddress"
+      >
 
-      <button type="submit">
+      <label for="transactionHash">
+        Transaction Hash
+      </label>
+
+      <input
+        id="transactionHash"
+      >
+
+      <button
+        id="saveButton"
+        type="submit"
+      >
         Spremi potvrdu
       </button>
 
@@ -257,73 +413,215 @@
 </div>
 
 <script>
-const form = document.getElementById("certificateForm");
-const message = document.getElementById("message");
+
+const form =
+  document.getElementById("certificateForm");
+
+const message =
+  document.getElementById("message");
+
+const saveButton =
+  document.getElementById("saveButton");
+
 
 form.addEventListener("submit", async (event) => {
 
   event.preventDefault();
 
+  const adminKey =
+    document.getElementById("adminKey")
+      .value
+      .trim();
+
+  if (!adminKey) {
+
+    message.style.display = "block";
+    message.className = "error";
+    message.textContent =
+      "Unesite administratorski ključ.";
+
+    return;
+  }
+
+
+  const periodStart =
+    document.getElementById("periodStart").value;
+
+  const periodEnd =
+    document.getElementById("periodEnd").value;
+
+
+  if (
+    periodStart &&
+    periodEnd &&
+    periodEnd < periodStart
+  ) {
+
+    message.style.display = "block";
+    message.className = "error";
+    message.textContent =
+      "Datum završetka ne može biti prije datuma početka.";
+
+    return;
+  }
+
+
   message.style.display = "block";
   message.className = "";
   message.textContent = "Spremanje...";
 
+  saveButton.disabled = true;
+
+
   const data = {
-    participantName: document.getElementById("participantName").value.trim(),
-    issuer: "Uslužni obrt Alimdar",
-    area: document.getElementById("area").value.trim(),
-    topic: document.getElementById("topic").value.trim(),
-    periodStart: document.getElementById("periodStart").value,
-    periodEnd: document.getElementById("periodEnd").value,
-    duration: document.getElementById("duration").value.trim(),
-    workFormat: document.getElementById("workFormat").value.trim(),
-    issueDate: document.getElementById("issueDate").value || null,
-    status: document.getElementById("status").value,
+
+    participantName:
+      document.getElementById("participantName")
+        .value
+        .trim(),
+
+    issuer:
+      "Uslužni obrt Alimdar",
+
+    area:
+      document.getElementById("area")
+        .value
+        .trim(),
+
+    topic:
+      document.getElementById("topic")
+        .value
+        .trim(),
+
+    periodStart:
+      periodStart,
+
+    periodEnd:
+      periodEnd,
+
+    duration:
+      document.getElementById("duration")
+        .value
+        .trim(),
+
+    workFormat:
+      document.getElementById("workFormat")
+        .value
+        .trim(),
+
+    issueDate:
+      document.getElementById("issueDate")
+        .value || null,
+
+    status:
+      document.getElementById("status")
+        .value,
 
     blockchainNetwork:
-      document.getElementById("blockchainNetwork").value.trim() || null,
+      document.getElementById("blockchainNetwork")
+        .value
+        .trim() || null,
 
     contractAddress:
-      document.getElementById("contractAddress").value.trim() || null,
+      document.getElementById("contractAddress")
+        .value
+        .trim() || null,
 
     tokenId:
-      document.getElementById("tokenId").value.trim() || null,
+      document.getElementById("tokenId")
+        .value
+        .trim() || null,
 
     transactionHash:
-      document.getElementById("transactionHash").value.trim() || null
+      document.getElementById("transactionHash")
+        .value
+        .trim() || null
+
   };
+
 
   try {
 
-    const response = await fetch("/api/admin-certificates", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
+    const response =
+      await fetch("/api/admin-certificates", {
 
-    const result = await response.json();
+        method: "POST",
+
+        headers: {
+
+          "Content-Type":
+            "application/json",
+
+          "Authorization":
+            `Bearer ${adminKey}`
+
+        },
+
+        body:
+          JSON.stringify(data)
+
+      });
+
+
+    let result = {};
+
+    try {
+
+      result =
+        await response.json();
+
+    } catch {
+
+      result = {};
+
+    }
+
 
     if (!response.ok) {
-      throw new Error(result.error || "Spremanje nije uspjelo.");
+
+      if (response.status === 401) {
+
+        throw new Error(
+          "Administratorski ključ nije ispravan."
+        );
+
+      }
+
+      throw new Error(
+        result.error ||
+        "Spremanje potvrde nije uspjelo."
+      );
+
     }
+
 
     document.getElementById("certificateId").value =
       result.certificateId || "";
 
+
     message.className = "success";
+
     message.textContent =
-      "Potvrda je spremljena: " + result.certificateId;
+      "Potvrda je uspješno spremljena: " +
+      result.certificateId;
+
 
   } catch (error) {
 
     message.className = "error";
-    message.textContent = error.message;
+
+    message.textContent =
+      error.message ||
+      "Došlo je do pogreške prilikom spremanja.";
+
+  } finally {
+
+    saveButton.disabled = false;
 
   }
 
 });
+
 </script>
 
 </body>
