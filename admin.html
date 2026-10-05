@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALIMDAR — Upravljanje potvrdama</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #071f18;
+      color: #f4f1e8;
+    }
+
+    .container {
+      width: min(900px, 92%);
+      margin: 50px auto;
+    }
+
+    .brand {
+      color: #d8b85c;
+      letter-spacing: 4px;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 38px;
+      margin: 0 0 10px;
+    }
+
+    .intro {
+      color: #a9b8b1;
+      margin-bottom: 35px;
+      line-height: 1.6;
+    }
+
+    .card {
+      border: 1px solid #365448;
+      background: #09241b;
+      padding: 28px;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 7px;
+      color: #b9c5bf;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #45675a;
+      background: #102f25;
+      color: white;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 14px 24px;
+      border: 0;
+      background: #d8b85c;
+      color: #102018;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      opacity: .9;
+    }
+
+    #message {
+      margin-top: 20px;
+      padding: 15px;
+      display: none;
+      border: 1px solid #45675a;
+    }
+
+    .success {
+      color: #78e6a0;
+    }
+
+    .error {
+      color: #ff8b8b;
+    }
+
+    .note {
+      margin-top: 30px;
+      color: #82978e;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    @media(max-width:700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="brand">ALIMDAR TECHNOLOGY</div>
+
+  <h1>Upravljanje potvrdama</h1>
+
+  <p class="intro">
+    Interno administracijsko sučelje za unos potvrda o sudjelovanju
+    u stručnom savjetovanju u ALIMDAR registru.
+  </p>
+
+  <div class="card">
+
+    <form id="certificateForm">
+
+      <div class="grid">
+
+        <div>
+          <label>Certificate ID</label>
+          <input
+            id="certificateId"
+            placeholder="Automatski će se dodijeliti"
+            readonly
+          >
+        </div>
+
+        <div>
+          <label>Status</label>
+          <select id="status">
+            <option value="PENDING">PENDING</option>
+            <option value="VALID">VALID</option>
+            <option value="REVOKED">REVOKED</option>
+          </select>
+        </div>
+
+      </div>
+
+      <label>Ime i prezime</label>
+      <input id="participantName" required>
+
+      <label>Izdavatelj</label>
+      <input
+        id="issuer"
+        value="Uslužni obrt Alimdar"
+        readonly
+      >
+
+      <label>Područje stručnog savjetovanja</label>
+      <textarea id="area" required></textarea>
+
+      <label>Tema savjetovanja</label>
+      <textarea id="topic" required></textarea>
+
+      <div class="grid">
+
+        <div>
+          <label>Početak savjetovanja</label>
+          <input id="periodStart" type="date" required>
+        </div>
+
+        <div>
+          <label>Završetak savjetovanja</label>
+          <input id="periodEnd" type="date" required>
+        </div>
+
+      </div>
+
+      <label>Trajanje</label>
+      <input
+        id="duration"
+        placeholder="npr. 2 sata dnevno prema programu savjetovanja"
+      >
+
+      <label>Način održavanja</label>
+      <input
+        id="workFormat"
+        placeholder="npr. Rijeka, online i pisani zadaci"
+      >
+
+      <label>Datum izdavanja</label>
+      <input id="issueDate" type="date">
+
+      <h3 style="margin-top:35px;color:#d8b85c;">
+        Blockchain podaci
+      </h3>
+
+      <div class="grid">
+
+        <div>
+          <label>Network</label>
+          <input
+            id="blockchainNetwork"
+            placeholder="npr. Polygon"
+          >
+        </div>
+
+        <div>
+          <label>Token ID</label>
+          <input id="tokenId">
+        </div>
+
+      </div>
+
+      <label>Contract Address</label>
+      <input id="contractAddress">
+
+      <label>Transaction Hash</label>
+      <input id="transactionHash">
+
+      <button type="submit">
+        Spremi potvrdu
+      </button>
+
+      <div id="message"></div>
+
+    </form>
+
+  </div>
+
+  <p class="note">
+    ALIMDAR interni administracijski sustav.
+    Podaci se ne spremaju izravno iz preglednika u bazu,
+    nego putem zaštićenog administratorskog API-ja.
+  </p>
+
+</div>
+
+<script>
+const form = document.getElementById("certificateForm");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  message.style.display = "block";
+  message.className = "";
+  message.textContent = "Spremanje...";
+
+  const data = {
+    participantName: document.getElementById("participantName").value.trim(),
+    issuer: "Uslužni obrt Alimdar",
+    area: document.getElementById("area").value.trim(),
+    topic: document.getElementById("topic").value.trim(),
+    periodStart: document.getElementById("periodStart").value,
+    periodEnd: document.getElementById("periodEnd").value,
+    duration: document.getElementById("duration").value.trim(),
+    workFormat: document.getElementById("workFormat").value.trim(),
+    issueDate: document.getElementById("issueDate").value || null,
+    status: document.getElementById("status").value,
+
+    blockchainNetwork:
+      document.getElementById("blockchainNetwork").value.trim() || null,
+
+    contractAddress:
+      document.getElementById("contractAddress").value.trim() || null,
+
+    tokenId:
+      document.getElementById("tokenId").value.trim() || null,
+
+    transactionHash:
+      document.getElementById("transactionHash").value.trim() || null
+  };
+
+  try {
+
+    const response = await fetch("/api/admin-certificates", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || "Spremanje nije uspjelo.");
+    }
+
+    document.getElementById("certificateId").value =
+      result.certificateId || "";
+
+    message.className = "success";
+    message.textContent =
+      "Potvrda je spremljena: " + result.certificateId;
+
+  } catch (error) {
+
+    message.className = "error";
+    message.textContent = error.message;
+
+  }
+
+});
+</script>
+
+</body>
+</html>
