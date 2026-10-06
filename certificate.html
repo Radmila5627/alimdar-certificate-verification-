@@ -11,13 +11,21 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
-  background: #062219;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
 }
 
-/* GORNJA TRAKA */
+body {
+  background: #062219;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #173f32;
+}
+
+/* =====================================================
+   GORNJA TRAKA
+===================================================== */
 
 .toolbar {
   width: 1123px;
@@ -46,7 +54,13 @@ body {
   cursor: pointer;
 }
 
-/* PORUKA */
+.print-button:hover {
+  opacity: 0.9;
+}
+
+/* =====================================================
+   PORUKA
+===================================================== */
 
 .message {
   width: 1123px;
@@ -60,7 +74,9 @@ body {
   border: 1px solid #365448;
 }
 
-/* CERTIFIKAT */
+/* =====================================================
+   CERTIFIKAT
+===================================================== */
 
 .certificate {
   position: relative;
@@ -72,19 +88,20 @@ body {
 
   overflow: hidden;
 
-  background: white;
+  background: #f5ecd8;
 
   box-shadow:
-    0 15px 45px rgba(0,0,0,.35);
+    0 15px 45px rgba(0, 0, 0, 0.35);
 }
 
-/* ORIGINALNA POZADINA */
+/* =====================================================
+   POZADINSKA SLIKA
+===================================================== */
 
 .background {
   position: absolute;
 
-  top: 0;
-  left: 0;
+  inset: 0;
 
   width: 100%;
   height: 100%;
@@ -94,137 +111,133 @@ body {
   z-index: 0;
 }
 
-/*
-  DINAMIČKI PODACI
-
-  Namjerno ih držimo u
-  svijetlom središnjem području.
-*/
+/* =====================================================
+   GLAVNI PROMJENJIVI PODACI
+===================================================== */
 
 .dynamic {
   position: absolute;
 
   z-index: 2;
 
-  top: 245px;
-  left: 225px;
-  right: 225px;
+  top: 300px;
+  left: 220px;
+  right: 220px;
 
   text-align: center;
-
-  color: #183c31;
 }
 
-/* IME */
+/* IME POLAZNIKA */
 
 .name {
   font-family: Georgia, "Times New Roman", serif;
 
-  font-size: 33px;
+  font-size: 31px;
+  line-height: 1.15;
+
   font-weight: bold;
 
-  color: #412054;
+  color: #43205a;
 
-  margin-bottom: 16px;
+  margin-bottom: 15px;
 }
 
-/* UVOD */
+/* UVODNI TEKST */
 
 .intro {
-  font-size: 13px;
+  max-width: 720px;
+
+  margin: 0 auto 14px;
+
+  font-size: 12px;
   line-height: 1.4;
 
-  color: #343a36;
-
-  margin-bottom: 14px;
+  color: #303a34;
 }
 
 /* PODRUČJE */
 
 .area {
-  font-size: 17px;
+  max-width: 760px;
+
+  margin: 0 auto 8px;
+
+  font-size: 16px;
   line-height: 1.3;
 
   font-weight: bold;
 
   color: #173f32;
-
-  margin-bottom: 9px;
 }
 
 /* TEMA */
 
 .topic {
-  font-size: 11px;
+  max-width: 760px;
+
+  margin: 0 auto;
+
+  font-size: 10px;
   line-height: 1.35;
 
-  color: #3c463f;
-
-  max-width: 720px;
-
-  margin: 0 auto 15px;
+  color: #343b37;
 }
 
-/* TRI PODATKA */
+/* =====================================================
+   TRI PODATKA U SREDINI
+===================================================== */
 
 .details {
+  position: absolute;
+
+  z-index: 2;
+
+  top: 505px;
+  left: 230px;
+  right: 230px;
+
   display: grid;
 
-  grid-template-columns:
-    1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 
-  gap: 18px;
+  gap: 24px;
 
-  padding-top: 10px;
-
-  border-top:
-    1px solid rgba(116,89,23,.35);
+  text-align: center;
 }
 
-.detail small {
-  display: block;
-
-  color: #80631d;
-
-  font-size: 8px;
-  letter-spacing: 1px;
-
-  text-transform: uppercase;
-
-  margin-bottom: 6px;
-}
-
-.detail strong {
-  display: block;
-
-  color: #173f32;
-
+.detail-value {
   font-size: 11px;
   line-height: 1.3;
+
+  font-weight: bold;
+
+  color: #173f32;
 }
 
-/* DONJI PODACI */
+/* =====================================================
+   DONJI DIO
+===================================================== */
 
 .footer-data {
   position: absolute;
 
   z-index: 2;
 
-  left: 245px;
-  right: 245px;
-  bottom: 66px;
+  left: 200px;
+  right: 200px;
+
+  bottom: 65px;
 
   display: grid;
 
-  grid-template-columns:
-    1fr 130px 1fr;
+  grid-template-columns: 1fr 120px 1fr;
+
+  gap: 30px;
 
   align-items: end;
-
-  gap: 20px;
 }
 
-/* LIJEVO */
+/* DATUM + ID */
 
 .issue {
   font-size: 10px;
@@ -233,11 +246,13 @@ body {
   color: #173f32;
 }
 
-.cert-id {
+.issue strong {
   font-weight: bold;
 }
 
-/* QR */
+/* =====================================================
+   QR
+===================================================== */
 
 .qr-box {
   text-align: center;
@@ -246,35 +261,41 @@ body {
 .qr-image {
   display: block;
 
-  width: 100px;
-  height: 100px;
+  width: 92px;
+  height: 92px;
 
-  margin: auto;
+  margin: 0 auto;
+
+  padding: 4px;
 
   background: white;
 
-  border: 5px solid white;
+  border: 1px solid #b59643;
 }
 
 .qr-label {
-  margin-top: 4px;
+  margin-top: 5px;
 
   font-size: 7px;
 
-  color: #80631d;
+  color: #624d18;
+
+  font-weight: bold;
 
   text-transform: uppercase;
 
-  letter-spacing: 1px;
+  letter-spacing: 0.7px;
 }
 
-/* IZDAVATELJ */
+/* =====================================================
+   IZDAVATELJ
+===================================================== */
 
 .issuer {
   text-align: right;
 
   font-size: 10px;
-  line-height: 1.5;
+  line-height: 1.4;
 
   color: #173f32;
 }
@@ -285,32 +306,45 @@ body {
   font-size: 11px;
 }
 
-/* PENDING */
+/* =====================================================
+   STATUS
+===================================================== */
 
 .watermark {
   position: absolute;
 
-  z-index: 3;
+  z-index: 4;
 
-  top: 50%;
+  top: 52%;
   left: 50%;
 
   transform:
     translate(-50%, -50%)
-    rotate(-24deg);
+    rotate(-25deg);
 
-  font-size: 78px;
+  font-size: 72px;
 
   font-weight: bold;
 
-  letter-spacing: 9px;
+  letter-spacing: 10px;
 
-  color: rgba(110,80,20,.10);
+  color: rgba(100, 70, 20, 0.10);
 
   pointer-events: none;
 }
 
-/* PRINT */
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+.certificate-wrapper {
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+/* =====================================================
+   PRINT
+===================================================== */
 
 @page {
   size: A4 landscape;
@@ -328,6 +362,11 @@ body {
     display: none !important;
   }
 
+  .certificate-wrapper {
+    overflow: visible;
+    padding: 0;
+  }
+
   .certificate {
     width: 297mm;
     height: 210mm;
@@ -336,16 +375,15 @@ body {
 
     box-shadow: none;
   }
-
-  .watermark {
-    display: none !important;
-  }
 }
 </style>
 </head>
 
-
 <body>
+
+<!-- ===================================================
+     ALATNA TRAKA
+=================================================== -->
 
 <div class="toolbar">
 
@@ -364,6 +402,10 @@ body {
 </div>
 
 
+<!-- ===================================================
+     PORUKA
+=================================================== -->
+
 <div
   id="message"
   class="message"
@@ -372,22 +414,24 @@ body {
 </div>
 
 
+<div class="certificate-wrapper">
+
 <div
   id="certificate"
   class="certificate"
   style="display:none;"
 >
 
-  <!-- POSTOJEĆA SLIKA -->
+  <!-- NOVA ČISTA POZADINA -->
 
   <img
     class="background"
-    src="/certificate-background.png.png"
-    alt="ALIMDAR Certificate"
+    src="/certificate-background.png"
+    alt="ALIMDAR potvrda"
   >
 
 
-  <!-- PENDING / REVOKED -->
+  <!-- STATUS -->
 
   <div
     id="watermark"
@@ -398,7 +442,9 @@ body {
   </div>
 
 
-  <!-- SAMO PROMJENJIVI PODACI -->
+  <!-- =================================================
+       IME + SADRŽAJ
+  ================================================== -->
 
   <div class="dynamic">
 
@@ -426,47 +472,44 @@ body {
       class="topic"
     ></div>
 
-
-    <div class="details">
-
-      <div class="detail">
-
-        <small>
-          Razdoblje savjetovanja
-        </small>
-
-        <strong id="period"></strong>
-
-      </div>
+  </div>
 
 
-      <div class="detail">
+  <!-- =================================================
+       RAZDOBLJE / SATI / NAČIN
+  ================================================== -->
 
-        <small>
-          Ukupan fond sati
-        </small>
+  <div class="details">
 
-        <strong id="totalHours"></strong>
+    <div>
+      <div
+        id="period"
+        class="detail-value"
+      ></div>
+    </div>
 
-      </div>
+
+    <div>
+      <div
+        id="totalHours"
+        class="detail-value"
+      ></div>
+    </div>
 
 
-      <div class="detail">
-
-        <small>
-          Način održavanja
-        </small>
-
-        <strong id="workFormat"></strong>
-
-      </div>
-
+    <div>
+      <div
+        id="workFormat"
+        class="detail-value"
+      ></div>
     </div>
 
   </div>
 
 
-  <!-- DONJI DIO -->
+  <!-- =================================================
+       DONJI PODACI
+  ================================================== -->
 
   <div class="footer-data">
 
@@ -477,20 +520,22 @@ body {
         <strong id="issueDate"></strong>
       </div>
 
-      <div
-        id="certificateId"
-        class="cert-id"
-      ></div>
+      <div>
+        Certificate ID:
+        <strong id="certificateId"></strong>
+      </div>
 
     </div>
 
+
+    <!-- QR -->
 
     <div class="qr-box">
 
       <img
         id="qrImage"
         class="qr-image"
-        alt="QR provjera certifikata"
+        alt="QR provjera autentičnosti"
       >
 
       <div class="qr-label">
@@ -499,6 +544,8 @@ body {
 
     </div>
 
+
+    <!-- IZDAVATELJ -->
 
     <div class="issuer">
 
@@ -516,8 +563,14 @@ body {
 
 </div>
 
+</div>
+
 
 <script>
+
+/* =====================================================
+   ELEMENTI
+===================================================== */
 
 const message =
   document.getElementById("message");
@@ -531,6 +584,10 @@ const watermark =
 const printButton =
   document.getElementById("printButton");
 
+
+/* =====================================================
+   POMOĆNA FUNKCIJA
+===================================================== */
 
 function displayValue(
   value,
@@ -549,12 +606,17 @@ function displayValue(
 }
 
 
+/* =====================================================
+   UČITAVANJE POTVRDE
+===================================================== */
+
 async function loadCertificate() {
 
   const params =
     new URLSearchParams(
       window.location.search
     );
+
 
   const id =
     String(
@@ -563,6 +625,8 @@ async function loadCertificate() {
     .trim()
     .toUpperCase();
 
+
+  /* PROVJERA ID-a */
 
   if (
     !/^ALM-CON-\d{4}-\d{4,}$/.test(id)
@@ -577,9 +641,18 @@ async function loadCertificate() {
 
   try {
 
+    /* ===============================================
+       PODACI IZ ALIMDAR API-ja
+    =============================================== */
+
     const response =
       await fetch(
-        `/api/certificates?id=${encodeURIComponent(id)}`
+        `/api/certificates?id=${encodeURIComponent(id)}`,
+        {
+          headers: {
+            "Accept": "application/json"
+          }
+        }
       );
 
 
@@ -595,7 +668,9 @@ async function loadCertificate() {
       await response.json();
 
 
-    /* IME */
+    /* ===============================================
+       IME
+    =============================================== */
 
     document.getElementById(
       "participantName"
@@ -606,7 +681,9 @@ async function loadCertificate() {
       );
 
 
-    /* PODRUČJE */
+    /* ===============================================
+       PODRUČJE
+    =============================================== */
 
     document.getElementById(
       "area"
@@ -617,7 +694,9 @@ async function loadCertificate() {
       );
 
 
-    /* TEMA */
+    /* ===============================================
+       TEMA
+    =============================================== */
 
     document.getElementById(
       "topic"
@@ -627,7 +706,9 @@ async function loadCertificate() {
         : "";
 
 
-    /* RAZDOBLJE */
+    /* ===============================================
+       RAZDOBLJE
+    =============================================== */
 
     document.getElementById(
       "period"
@@ -635,7 +716,9 @@ async function loadCertificate() {
       displayValue(c.date);
 
 
-    /* FOND SATI */
+    /* ===============================================
+       UKUPAN FOND SATI
+    =============================================== */
 
     document.getElementById(
       "totalHours"
@@ -650,7 +733,9 @@ async function loadCertificate() {
       : "Nije još evidentirano";
 
 
-    /* NAČIN ODRŽAVANJA */
+    /* ===============================================
+       NAČIN ODRŽAVANJA
+    =============================================== */
 
     document.getElementById(
       "workFormat"
@@ -658,7 +743,9 @@ async function loadCertificate() {
       displayValue(c.format);
 
 
-    /* DATUM IZDAVANJA */
+    /* ===============================================
+       DATUM IZDAVANJA
+    =============================================== */
 
     document.getElementById(
       "issueDate"
@@ -669,29 +756,35 @@ async function loadCertificate() {
       );
 
 
-    /* CERTIFICATE ID */
+    /* ===============================================
+       CERTIFICATE ID
+    =============================================== */
 
     document.getElementById(
       "certificateId"
     ).textContent =
-      `Certificate ID: ${c.certificateId}`;
+      displayValue(
+        c.certificateId,
+        id
+      );
 
 
-    /*
-      QR SAD NE KORISTI JAVASCRIPT
-      BIBLIOTEKU.
+    /* ===============================================
+       QR
 
-      U QR se upisuje samo javna
-      verification adresa.
-    */
+       QR NE SADRŽI OSOBNE PODATKE.
+       SADRŽI SAMO JAVNU VERIFICATION ADRESU.
+    =============================================== */
 
     const verificationUrl =
       `${window.location.origin}/?id=${encodeURIComponent(c.certificateId)}`;
 
 
-    document.getElementById(
-      "qrImage"
-    ).src =
+    const qrImage =
+      document.getElementById("qrImage");
+
+
+    qrImage.src =
       "https://api.qrserver.com/v1/create-qr-code/" +
       "?size=220x220" +
       "&margin=8" +
@@ -701,7 +794,9 @@ async function loadCertificate() {
       );
 
 
-    /* STATUS */
+    /* ===============================================
+       STATUS
+    =============================================== */
 
     const status =
       String(
@@ -742,12 +837,19 @@ async function loadCertificate() {
       watermark.style.display =
         "block";
 
+      /*
+        Za sada PENDING ne printamo
+        kao završnu izdanu potvrdu.
+      */
+
       printButton.style.display =
         "none";
     }
 
 
-    /* PRIKAŽI CERTIFIKAT */
+    /* ===============================================
+       PRIKAŽI
+    =============================================== */
 
     message.style.display =
       "none";
@@ -759,7 +861,10 @@ async function loadCertificate() {
 
   catch (error) {
 
-    console.error(error);
+    console.error(
+      "ALIMDAR certificate error:",
+      error
+    );
 
     message.textContent =
       "Potvrdu trenutačno nije moguće učitati.";
@@ -767,11 +872,21 @@ async function loadCertificate() {
 }
 
 
+/* =====================================================
+   PRINT
+===================================================== */
+
 printButton.addEventListener(
   "click",
-  () => window.print()
+  () => {
+    window.print();
+  }
 );
 
+
+/* =====================================================
+   START
+===================================================== */
 
 loadCertificate();
 
