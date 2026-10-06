@@ -2,11 +2,7 @@
 <html lang="hr">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>ALIMDAR — Certifikat</title>
 
@@ -28,209 +24,125 @@
       padding: 18px;
     }
 
-    /* =====================================================
-       NASLOV IZNAD CERTIFIKATA
-       ===================================================== */
+    /* NASLOV IZNAD CERTIFIKATA */
 
     .page-title {
       width: min(1188px, 100%);
       margin: 0 auto 18px auto;
-
       color: #d8ad43;
-
       font-size: 17px;
       font-weight: 700;
       letter-spacing: 2px;
     }
 
-    /* =====================================================
-       CERTIFIKAT
-       A4 LANDSCAPE OMJER 297 x 210
-       ===================================================== */
+    /* A4 LANDSCAPE */
 
     .certificate {
       position: relative;
-
       width: min(1188px, 100%);
       aspect-ratio: 297 / 210;
-
       margin: 0 auto;
-
       overflow: hidden;
-
       background: #f5ead0;
-
-      box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
     }
 
-    /* =====================================================
-       POZADINA
-       ===================================================== */
+    /* POZADINA */
 
     .certificate-background {
       position: absolute;
-
       inset: 0;
-
       width: 100%;
       height: 100%;
-
       object-fit: fill;
-
       z-index: 1;
-
       user-select: none;
       pointer-events: none;
     }
 
-    /* =====================================================
-       DINAMIČKI SADRŽAJ
-       ===================================================== */
+    /* DINAMIČKI SADRŽAJ */
 
     .certificate-content {
       position: absolute;
-
       inset: 0;
-
       z-index: 2;
-
       color: #082b22;
     }
 
-    /* =====================================================
-       IME I PREZIME
-       ===================================================== */
+    /* IME I PREZIME */
 
     .participant-name {
       position: absolute;
-
-      top: 40.5%;
+      top: 39.8%;
       left: 24%;
-
       width: 52%;
-
       margin: 0;
-
       text-align: center;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size:
-        clamp(22px, 2.7vw, 36px);
-
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(22px, 2.7vw, 36px);
       line-height: 1;
-
       font-weight: 700;
-
       color: #3d1455;
     }
 
-    /* =====================================================
-       REČENICA O CERTIFIKATU
-       ===================================================== */
+    /* OPIS */
 
     .statement {
       position: absolute;
-
-      top: 46.5%;
+      top: 45.3%;
       left: 25%;
-
       width: 50%;
-
       margin: 0;
-
       text-align: center;
-
-      font-size:
-        clamp(7px, 0.85vw, 11px);
-
-      line-height: 1.25;
-
+      font-size: clamp(7px, 0.82vw, 10px);
+      line-height: 1.2;
       color: #171717;
     }
 
-    /* =====================================================
-       PODRUČJE STRUČNOG SAVJETOVANJA
-       ===================================================== */
+    /* PODRUČJE SAVJETOVANJA */
 
     .area {
       position: absolute;
-
-      top: 51.8%;
+      top: 50.3%;
       left: 24%;
-
       width: 52%;
-
       margin: 0;
-
       text-align: center;
-
-      font-size:
-        clamp(9px, 1.25vw, 16px);
-
-      line-height: 1.15;
-
+      font-size: clamp(9px, 1.15vw, 15px);
+      line-height: 1.1;
       font-weight: 700;
-
       color: #063a2e;
     }
 
-    /* =====================================================
-       TEMA SAVJETOVANJA
-       ===================================================== */
+    /* TEMA */
 
     .topic {
       position: absolute;
-
-      top: 56.5%;
-      left: 25%;
-
-      width: 50%;
-
+      top: 54.7%;
+      left: 26%;
+      width: 48%;
       margin: 0;
-
       text-align: center;
-
-      font-size:
-        clamp(6px, 0.72vw, 9px);
-
-      line-height: 1.25;
-
+      font-size: clamp(6px, 0.65vw, 8px);
+      line-height: 1.2;
       color: #262626;
     }
 
-    /* =====================================================
-       RAZDOBLJE / SATI / NAČIN ODRŽAVANJA
-
-       Naslovi su već na grafičkoj podlozi.
-       HTML upisuje SAMO vrijednosti.
-       ===================================================== */
+    /* RAZDOBLJE / SATI / NAČIN */
 
     .info-value {
       position: absolute;
-
-      top: 68.5%;
-
+      top: 67.4%;
       margin: 0;
-
       text-align: center;
-
-      font-size:
-        clamp(7px, 0.9vw, 11px);
-
+      font-size: clamp(7px, 0.82vw, 10px);
       line-height: 1.2;
-
       font-weight: 700;
-
       color: #102e26;
     }
 
     .period {
-      left: 19.5%;
+      left: 20%;
       width: 22%;
     }
 
@@ -244,135 +156,70 @@
       width: 22%;
     }
 
-    /* =====================================================
-       DATUM IZDAVANJA
-
-       Na podlozi već piše "Datum izdavanja:"
-       zato HTML dodaje samo vrijednost.
-       ===================================================== */
+    /* DATUM IZDAVANJA */
 
     .issue-date {
       position: absolute;
-
-      left: 26.2%;
-      bottom: 10.3%;
-
-      width: 14%;
-
+      left: 25.2%;
+      bottom: 8.1%;
+      width: 13%;
       margin: 0;
-
       text-align: left;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size:
-        clamp(7px, 0.85vw, 10px);
-
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(6px, 0.72vw, 9px);
       font-weight: 600;
-
       color: #171717;
     }
 
-    /* =====================================================
-       CERTIFICATE ID
-
-       Na podlozi već piše "Certificate ID:"
-       ===================================================== */
+    /* ID CERTIFIKATA */
 
     .certificate-id {
       position: absolute;
-
-      left: 26.2%;
-      bottom: 7.5%;
-
+      left: 25.2%;
+      bottom: 5.3%;
       width: 18%;
-
       margin: 0;
-
       text-align: left;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size:
-        clamp(6px, 0.75vw, 9px);
-
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(6px, 0.68vw, 8px);
       font-weight: 600;
-
       color: #171717;
     }
 
-    /* =====================================================
-       QR KOD
-
-       Smješten u bijeli kvadrat na podlozi.
-       ===================================================== */
+    /* QR */
 
     .qr-box {
       position: absolute;
-
       left: 50%;
-      bottom: 10.5%;
-
+      bottom: 8.2%;
       transform: translateX(-50%);
-
-      width: 8.1%;
+      width: 7.3%;
       aspect-ratio: 1 / 1;
-
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       background: #ffffff;
-
-      padding: 3px;
-
+      padding: 2px;
       border: none;
     }
 
     .qr-box img {
       display: block;
-
       width: 100%;
       height: 100%;
-
       object-fit: contain;
     }
 
-    /*
-      Natpis PROVJERA AUTENTIČNOSTI
-      već postoji na grafičkoj podlozi.
-    */
-
-    .qr-status {
-      display: none;
-    }
-
-    /* =====================================================
-       STATUS
-       ===================================================== */
+    /* STATUS */
 
     .status-badge {
       position: absolute;
-
-      right: 17%;
-      bottom: 5.8%;
-
+      right: 15.5%;
+      bottom: 3.4%;
       padding: 3px 7px;
-
       border-radius: 3px;
-
-      font-size:
-        clamp(6px, 0.7vw, 8px);
-
+      font-size: clamp(6px, 0.7vw, 8px);
       font-weight: 700;
-
       letter-spacing: 0.8px;
     }
 
@@ -391,45 +238,26 @@
       color: #ffffff;
     }
 
-    /* =====================================================
-       UČITAVANJE / GREŠKA
-       ===================================================== */
+    /* PORUKE */
 
     .message {
       position: absolute;
-
       top: 42%;
       left: 27%;
-
       width: 46%;
-
       padding: 18px;
-
       text-align: center;
-
-      background:
-        rgba(255, 255, 255, 0.95);
-
-      border:
-        1px solid #b58b2d;
-
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #b58b2d;
       color: #1d1d1d;
-
       z-index: 10;
     }
 
     .message strong {
       display: block;
-
       margin-bottom: 8px;
-
       color: #60400d;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+      font-family: Georgia, "Times New Roman", serif;
       font-size: 20px;
     }
 
@@ -437,42 +265,27 @@
       display: none !important;
     }
 
-    /* =====================================================
-       GUMBI ISPOD CERTIFIKATA
-       ===================================================== */
+    /* GUMBI */
 
     .actions {
       width: min(1188px, 100%);
-
       margin: 18px auto 0 auto;
-
       display: flex;
-
       justify-content: center;
-
       gap: 12px;
     }
 
     .actions button,
     .actions a {
       appearance: none;
-
-      border:
-        1px solid #c9a13e;
-
+      border: 1px solid #c9a13e;
       background: #0b392d;
-
       color: #f0d27a;
-
       padding: 11px 18px;
-
       font-size: 14px;
       font-weight: 700;
-
       text-decoration: none;
-
       cursor: pointer;
-
       border-radius: 4px;
     }
 
@@ -481,9 +294,7 @@
       background: #10503f;
     }
 
-    /* =====================================================
-       A4 LANDSCAPE PRINT
-       ===================================================== */
+    /* A4 ISPIS */
 
     @page {
       size: A4 landscape;
@@ -491,17 +302,13 @@
     }
 
     @media print {
-
       html,
       body {
         width: 297mm;
         height: 210mm;
-
         margin: 0 !important;
         padding: 0 !important;
-
         background: white !important;
-
         overflow: hidden;
       }
 
@@ -513,28 +320,17 @@
       .certificate {
         width: 297mm !important;
         height: 210mm !important;
-
         max-width: none !important;
-
         margin: 0 !important;
-
         box-shadow: none !important;
-
-        page-break-before: avoid;
-        page-break-after: avoid;
         page-break-inside: avoid;
-
-        break-before: avoid;
-        break-after: avoid;
         break-inside: avoid;
       }
 
       .certificate-background {
         width: 297mm !important;
         height: 210mm !important;
-
         object-fit: fill !important;
-
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
@@ -542,13 +338,6 @@
       .certificate-content {
         width: 297mm;
         height: 210mm;
-
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
-      .qr-box,
-      .status-badge {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
@@ -562,18 +351,7 @@
     ALIMDAR TECHNOLOGY — CERTIFICATE
   </div>
 
-  <main
-    class="certificate"
-    id="certificate"
-  >
-
-    <!--
-      POZADINSKA SLIKA
-
-      GitHub datoteka mora se zvati TOČNO:
-
-      certificate-background.png
-    -->
+  <main class="certificate">
 
     <img
       class="certificate-background"
@@ -581,139 +359,64 @@
       alt="ALIMDAR certifikat"
     >
 
-    <!-- UČITAVANJE -->
-
-    <div
-      id="loadingMessage"
-      class="message"
-    >
-      <strong>
-        ALIMDAR TECHNOLOGY
-      </strong>
-
+    <div id="loadingMessage" class="message">
+      <strong>ALIMDAR TECHNOLOGY</strong>
       Učitavanje certifikata...
     </div>
 
-    <!-- GREŠKA -->
-
-    <div
-      id="errorMessage"
-      class="message hidden"
-    >
-      <strong>
-        ALIMDAR TECHNOLOGY — CERTIFICATE
-      </strong>
-
+    <div id="errorMessage" class="message hidden">
+      <strong>ALIMDAR TECHNOLOGY — CERTIFICATE</strong>
       Certifikat trenutačno nije moguće učitati.
     </div>
 
-    <!-- =================================================
-         DINAMIČKI PODACI
-         ================================================= -->
-
-    <div
-      id="certificateContent"
-      class="certificate-content hidden"
-    >
-
-      <!-- IME I PREZIME -->
+    <div id="certificateContent" class="certificate-content hidden">
 
       <h1
         id="participantName"
-        class="participant-name"
-      ></h1>
-
-      <!-- OPIS -->
+        class="participant-name">
+      </h1>
 
       <p class="statement">
-        Ovim se certifikatom evidentira sudjelovanje
-        navedene osobe u stručnom savjetovanju koje je
-        proveo <strong>Uslužni obrt Alimdar.</strong>
+        Ovim se certifikatom evidentira sudjelovanje navedene osobe
+        u stručnom savjetovanju koje je proveo
+        <strong>Uslužni obrt Alimdar.</strong>
       </p>
 
-      <!-- PODRUČJE -->
+      <p id="area" class="area"></p>
 
-      <p
-        id="area"
-        class="area"
-      ></p>
+      <p id="topic" class="topic"></p>
 
-      <!-- TEMA -->
+      <p id="period" class="info-value period"></p>
 
-      <p
-        id="topic"
-        class="topic"
-      ></p>
+      <p id="totalHours" class="info-value hours"></p>
 
-      <!-- RAZDOBLJE -->
+      <p id="workFormat" class="info-value format"></p>
 
-      <p
-        id="period"
-        class="info-value period"
-      ></p>
+      <p id="issueDate" class="issue-date"></p>
 
-      <!-- UKUPAN FOND SATI -->
-
-      <p
-        id="totalHours"
-        class="info-value hours"
-      ></p>
-
-      <!-- NAČIN ODRŽAVANJA -->
-
-      <p
-        id="workFormat"
-        class="info-value format"
-      ></p>
-
-      <!-- DATUM IZDAVANJA -->
-
-      <p
-        id="issueDate"
-        class="issue-date"
-      ></p>
-
-      <!-- CERTIFICATE ID -->
-
-      <p
-        id="certificateId"
-        class="certificate-id"
-      ></p>
-
-      <!-- QR -->
+      <p id="certificateId" class="certificate-id"></p>
 
       <div class="qr-box">
-
         <img
           id="qrCode"
           alt="QR provjera autentičnosti"
         >
-
       </div>
-
-      <!-- STATUS -->
 
       <div
         id="statusBadge"
-        class="status-badge pending"
-      >
+        class="status-badge pending">
         PENDING
       </div>
 
     </div>
-
   </main>
-
-  <!-- ===================================================
-       KONTROLE
-       =================================================== -->
 
   <div class="actions">
 
     <button
       type="button"
-      onclick="window.print()"
-    >
+      onclick="window.print()">
       Ispiši A4 certifikat
     </button>
 
@@ -721,116 +424,64 @@
       id="verificationLink"
       href="/"
       target="_blank"
-      rel="noopener"
-    >
+      rel="noopener">
       Provjeri certifikat
     </a>
 
   </div>
 
   <script>
-
-    /* =====================================================
-       CERTIFICATE ID IZ URL-a
-       ===================================================== */
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
+    const params = new URLSearchParams(window.location.search);
 
     const requestedCertificateId =
-      String(
-        params.get("id") || ""
-      )
+      String(params.get("id") || "")
         .trim()
         .toUpperCase();
 
-
-    /* =====================================================
-       ELEMENTI
-       ===================================================== */
-
     const loadingMessage =
-      document.getElementById(
-        "loadingMessage"
-      );
+      document.getElementById("loadingMessage");
 
     const errorMessage =
-      document.getElementById(
-        "errorMessage"
-      );
+      document.getElementById("errorMessage");
 
     const certificateContent =
-      document.getElementById(
-        "certificateContent"
-      );
+      document.getElementById("certificateContent");
 
     const participantNameEl =
-      document.getElementById(
-        "participantName"
-      );
+      document.getElementById("participantName");
 
     const areaEl =
-      document.getElementById(
-        "area"
-      );
+      document.getElementById("area");
 
     const topicEl =
-      document.getElementById(
-        "topic"
-      );
+      document.getElementById("topic");
 
     const periodEl =
-      document.getElementById(
-        "period"
-      );
+      document.getElementById("period");
 
     const totalHoursEl =
-      document.getElementById(
-        "totalHours"
-      );
+      document.getElementById("totalHours");
 
     const workFormatEl =
-      document.getElementById(
-        "workFormat"
-      );
+      document.getElementById("workFormat");
 
     const issueDateEl =
-      document.getElementById(
-        "issueDate"
-      );
+      document.getElementById("issueDate");
 
     const certificateIdEl =
-      document.getElementById(
-        "certificateId"
-      );
+      document.getElementById("certificateId");
 
     const qrCodeEl =
-      document.getElementById(
-        "qrCode"
-      );
+      document.getElementById("qrCode");
 
     const statusBadgeEl =
-      document.getElementById(
-        "statusBadge"
-      );
+      document.getElementById("statusBadge");
 
     const verificationLinkEl =
-      document.getElementById(
-        "verificationLink"
-      );
+      document.getElementById("verificationLink");
 
 
-    /* =====================================================
-       POMOĆNE FUNKCIJE
-       ===================================================== */
-
-    function safeValue(
-      value,
-      fallback = ""
-    ) {
-
+    function safeValue(value, fallback = "") {
       if (
         value === null ||
         value === undefined ||
@@ -844,31 +495,15 @@
 
 
     function showError() {
-
-      loadingMessage
-        .classList
-        .add("hidden");
-
-      certificateContent
-        .classList
-        .add("hidden");
-
-      errorMessage
-        .classList
-        .remove("hidden");
+      loadingMessage.classList.add("hidden");
+      certificateContent.classList.add("hidden");
+      errorMessage.classList.remove("hidden");
     }
 
 
-    /* =====================================================
-       STATUS
-       ===================================================== */
-
     function setStatus(status) {
-
       const normalized =
-        String(
-          status || "PENDING"
-        ).toUpperCase();
+        String(status || "PENDING").toUpperCase();
 
       statusBadgeEl.classList.remove(
         "pending",
@@ -877,136 +512,74 @@
       );
 
       if (normalized === "VALID") {
+        statusBadgeEl.classList.add("valid");
+        statusBadgeEl.textContent = "VALID";
 
-        statusBadgeEl
-          .classList
-          .add("valid");
-
-        statusBadgeEl.textContent =
-          "VALID";
-
-      } else if (
-        normalized === "REVOKED"
-      ) {
-
-        statusBadgeEl
-          .classList
-          .add("revoked");
-
-        statusBadgeEl.textContent =
-          "REVOKED";
+      } else if (normalized === "REVOKED") {
+        statusBadgeEl.classList.add("revoked");
+        statusBadgeEl.textContent = "REVOKED";
 
       } else {
-
-        statusBadgeEl
-          .classList
-          .add("pending");
-
-        statusBadgeEl.textContent =
-          "PENDING";
+        statusBadgeEl.classList.add("pending");
+        statusBadgeEl.textContent = "PENDING";
       }
     }
 
 
-    /* =====================================================
-       QR KOD
-
-       QR sadrži samo URL javne provjere.
-       Osobni podaci nisu zapisani u samom QR-u.
-       ===================================================== */
-
     function createQr(id) {
-
       const verificationUrl =
-        `${window.location.origin}/?id=${
-          encodeURIComponent(id)
-        }`;
+        `${window.location.origin}/?id=${encodeURIComponent(id)}`;
 
-      verificationLinkEl.href =
-        verificationUrl;
-
-      /*
-        Trenutačni QR prikaz koristi URL generator.
-        U sljedećoj fazi možemo QR generirati lokalno
-        bez vanjskog servisa.
-      */
+      verificationLinkEl.href = verificationUrl;
 
       const qrUrl =
         "https://api.qrserver.com/v1/create-qr-code/" +
         "?size=300x300" +
         "&margin=0" +
         "&data=" +
-        encodeURIComponent(
-          verificationUrl
-        );
+        encodeURIComponent(verificationUrl);
 
-      qrCodeEl.src =
-        qrUrl;
+      qrCodeEl.src = qrUrl;
     }
 
 
-    /* =====================================================
-       UČITAJ CERTIFIKAT
-       ===================================================== */
-
     async function loadCertificate() {
-
-      /* -----------------------------------------------
-         Provjera ID formata
-         ----------------------------------------------- */
 
       if (
         !/^ALM-CON-\d{4}-\d{4,}$/.test(
           requestedCertificateId
         )
       ) {
-
         showError();
         return;
       }
 
-
       try {
-
-        /* ---------------------------------------------
-           API
-           --------------------------------------------- */
 
         const response =
           await fetch(
-            `/api/certificates?id=${
-              encodeURIComponent(
-                requestedCertificateId
-              )
-            }`,
+            `/api/certificates?id=${encodeURIComponent(
+              requestedCertificateId
+            )}`,
             {
               headers: {
-                "Accept":
-                  "application/json"
+                "Accept": "application/json"
               },
-
               cache: "no-store"
             }
           );
 
-
         if (!response.ok) {
-
           throw new Error(
-            `Certificate API error: ${
-              response.status
-            }`
+            `Certificate API error: ${response.status}`
           );
         }
-
 
         const certificate =
           await response.json();
 
 
-        /* ---------------------------------------------
-           IME I PREZIME
-           --------------------------------------------- */
+        /* IME */
 
         participantNameEl.textContent =
           safeValue(
@@ -1015,9 +588,7 @@
           );
 
 
-        /* ---------------------------------------------
-           PODRUČJE
-           --------------------------------------------- */
+        /* PODRUČJE */
 
         areaEl.textContent =
           safeValue(
@@ -1026,14 +597,10 @@
           );
 
 
-        /* ---------------------------------------------
-           TEMA
-           --------------------------------------------- */
+        /* TEMA */
 
         const topic =
-          safeValue(
-            certificate.topic
-          );
+          safeValue(certificate.topic);
 
         topicEl.textContent =
           topic
@@ -1041,9 +608,7 @@
             : "";
 
 
-        /* ---------------------------------------------
-           RAZDOBLJE
-           --------------------------------------------- */
+        /* RAZDOBLJE */
 
         periodEl.textContent =
           safeValue(
@@ -1052,50 +617,23 @@
           );
 
 
-        /* ---------------------------------------------
-           UKUPAN FOND SATI
-
-           Koristimo posebno polje totalHours.
-           --------------------------------------------- */
-
-        const totalHours =
-          certificate.totalHours;
-
+        /* UKUPAN FOND SATI */
 
         if (
-          totalHours !== null &&
-          totalHours !== undefined &&
-          totalHours !== ""
+          certificate.totalHours !== null &&
+          certificate.totalHours !== undefined &&
+          certificate.totalHours !== ""
         ) {
-
-          const numberOfHours =
-            Number(totalHours);
-
-          if (
-            Number.isFinite(
-              numberOfHours
-            )
-          ) {
-
-            totalHoursEl.textContent =
-              `${numberOfHours} sati`;
-
-          } else {
-
-            totalHoursEl.textContent =
-              `${totalHours} sati`;
-          }
+          totalHoursEl.textContent =
+            `${certificate.totalHours} sati`;
 
         } else {
-
           totalHoursEl.textContent =
             "Nije još evidentirano";
         }
 
 
-        /* ---------------------------------------------
-           NAČIN ODRŽAVANJA
-           --------------------------------------------- */
+        /* NAČIN ODRŽAVANJA */
 
         workFormatEl.textContent =
           safeValue(
@@ -1104,47 +642,32 @@
           );
 
 
-        /* ---------------------------------------------
-           STATUS
-           --------------------------------------------- */
+        /* STATUS */
 
         const status =
           String(
-            certificate.status ||
-            "PENDING"
+            certificate.status || "PENDING"
           ).toUpperCase();
-
 
         setStatus(status);
 
 
-        /* ---------------------------------------------
-           DATUM IZDAVANJA
-
-           Podloga već ima naziv polja.
-           Ovdje stavljamo SAMO vrijednost.
-           --------------------------------------------- */
+        /* DATUM IZDAVANJA */
 
         if (
           status === "VALID" &&
           certificate.issueDate
         ) {
-
           issueDateEl.textContent =
             certificate.issueDate;
 
         } else {
-
           issueDateEl.textContent =
             "Nije još izdano";
         }
 
 
-        /* ---------------------------------------------
-           CERTIFICATE ID
-
-           Podloga već ima "Certificate ID:"
-           --------------------------------------------- */
+        /* ID CERTIFIKATA */
 
         const actualCertificateId =
           safeValue(
@@ -1152,44 +675,23 @@
             requestedCertificateId
           );
 
-
         certificateIdEl.textContent =
           actualCertificateId;
 
 
-        /* ---------------------------------------------
-           QR
-           --------------------------------------------- */
+        /* QR */
 
-        createQr(
-          actualCertificateId
-        );
+        createQr(actualCertificateId);
 
 
-        /* ---------------------------------------------
-           PRIKAŽI CERTIFIKAT
-           --------------------------------------------- */
+        /* PRIKAŽI CERTIFIKAT */
 
-        loadingMessage
-          .classList
-          .add("hidden");
-
-        errorMessage
-          .classList
-          .add("hidden");
-
-        certificateContent
-          .classList
-          .remove("hidden");
-
-
-        /* ---------------------------------------------
-           NASLOV KARTICE
-           --------------------------------------------- */
+        loadingMessage.classList.add("hidden");
+        errorMessage.classList.add("hidden");
+        certificateContent.classList.remove("hidden");
 
         document.title =
           `ALIMDAR — ${actualCertificateId}`;
-
 
       } catch (error) {
 
@@ -1203,12 +705,7 @@
     }
 
 
-    /* =====================================================
-       START
-       ===================================================== */
-
     loadCertificate();
-
   </script>
 
 </body>
