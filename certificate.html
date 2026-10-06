@@ -1,360 +1,341 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="hr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ALIMDAR — Certifikat</title>
+<title>ALIMDAR — Certifikat</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #062a21;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    padding: 18px;
+}
+
+.page-title {
+    width: min(100%, 1536px);
+    margin: 0 auto 14px;
+    color: #e2b84f;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* =========================================================
+   CERTIFIKAT
+   Slika određuje cijeli koordinatni sustav.
+   ========================================================= */
+
+.certificate {
+    position: relative;
+    width: min(100%, 1536px);
+    aspect-ratio: 1536 / 832;
+    margin: 0 auto;
+
+    background:
+        url("./certificate-background.png")
+        center center / 100% 100%
+        no-repeat;
+
+    overflow: hidden;
+}
+
+/* =========================================================
+   ZAJEDNIČKO
+   ========================================================= */
+
+.field {
+    position: absolute;
+    margin: 0;
+    text-align: center;
+    color: #111;
+}
+
+/* =========================================================
+   IME
+   ========================================================= */
+
+#participantName {
+    top: 40.6%;
+    left: 25%;
+    width: 50%;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(22px, 2.5vw, 40px);
+    line-height: 1;
+    font-weight: 700;
+    color: #45145c;
+}
+
+/* =========================================================
+   OPIS ISPOD IMENA
+   ========================================================= */
+
+#statement {
+    top: 46.8%;
+    left: 26%;
+    width: 48%;
+
+    font-size: clamp(7px, 0.72vw, 11px);
+    line-height: 1.25;
+}
+
+/* =========================================================
+   PODRUČJE
+   ========================================================= */
+
+#area {
+    top: 51.4%;
+    left: 24%;
+    width: 52%;
+
+    font-size: clamp(10px, 1.08vw, 17px);
+    line-height: 1.15;
+    font-weight: 700;
+    color: #07372d;
+}
+
+/* =========================================================
+   TEMA
+
+   Držimo je VISOKO iznad tri naslova koja su već nacrtana
+   na certificate-background.png.
+   ========================================================= */
+
+#topic {
+    top: 56.1%;
+    left: 27%;
+    width: 46%;
+
+    font-size: clamp(6px, 0.54vw, 9px);
+    line-height: 1.25;
+    color: #222;
+}
+
+/* =========================================================
+   TRI VRIJEDNOSTI
+
+   Naslovi:
+   RAZDOBLJE SAVJETOVANJA
+   UKUPAN FOND SATI
+   NAČIN ODRŽAVANJA
+
+   već postoje NA SLICI.
+   Ovdje ispisujemo samo vrijednosti ispod crta.
+   ========================================================= */
+
+#period {
+    top: 68.0%;
+    left: 19%;
+    width: 19%;
+
+    font-size: clamp(7px, 0.72vw, 11px);
+    font-weight: 700;
+}
+
+#totalHours {
+    top: 68.0%;
+    left: 41%;
+    width: 18%;
+
+    font-size: clamp(7px, 0.72vw, 11px);
+    font-weight: 700;
+}
+
+#workFormat {
+    top: 68.0%;
+    left: 62%;
+    width: 19%;
+
+    font-size: clamp(7px, 0.72vw, 11px);
+    font-weight: 700;
+}
+
+/* =========================================================
+   QR
+
+   Bijeli kvadrat je već nacrtan na pozadini.
+   QR stavljamo UNUTAR njega.
+   ========================================================= */
+
+#qr {
+    position: absolute;
+
+    left: 50%;
+    top: 83.4%;
+
+    width: 6.7%;
+    aspect-ratio: 1 / 1;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+    padding: 3px;
+}
+
+#qr img,
+#qr canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* =========================================================
+   DONJI LIJEVI PODACI
+
+   "Datum izdavanja:" i "Certificate ID:"
+   već postoje na slici.
+   HTML dodaje SAMO vrijednosti.
+   ========================================================= */
+
+#issueDate {
+    left: 26.2%;
+    bottom: 6.8%;
+    width: 12%;
+
+    text-align: left;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(6px, 0.62vw, 10px);
+    font-weight: 700;
+}
+
+#certificateId {
+    left: 26.2%;
+    bottom: 3.8%;
+    width: 16%;
+
+    text-align: left;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(6px, 0.58vw, 9px);
+    font-weight: 700;
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+#status {
+    position: absolute;
+
+    right: 12.5%;
+    bottom: 2.4%;
+
+    padding: 4px 9px;
+
+    border: 1px solid #9b7416;
+    border-radius: 3px;
+
+    background: #e4ba48;
+    color: #191609;
+
+    font-size: clamp(6px, 0.62vw, 10px);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+#status.valid {
+    background: #145c42;
+    color: white;
+}
+
+#status.revoked {
+    background: #8c2929;
+    color: white;
+}
+
+/* =========================================================
+   GREŠKA
+   ========================================================= */
+
+#error {
+    display: none;
+
+    max-width: 800px;
+    margin: 30px auto;
+
+    padding: 25px;
+
+    background: #fff4d6;
+    border: 1px solid #c99a32;
+
+    text-align: center;
+    color: #33220c;
+}
+
+/* =========================================================
+   A4 LANDSCAPE
+
+   A4 NE MIJENJA unutarnji raspored.
+   Cijeli gotov certifikat skalira se kao jedna cjelina.
+   ========================================================= */
+
+@page {
+    size: A4 landscape;
+    margin: 0;
+}
+
+@media print {
 
     html,
     body {
-      margin: 0;
-      padding: 0;
-      background: #022c22;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      padding: 20px;
-    }
-
-    .page-title {
-      width: min(100%, 1536px);
-      margin: 0 auto 14px auto;
-
-      color: #e7bd55;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 2px;
-    }
-
-    /*
-      VAŽNO:
-      Ovo je naš jedini koordinatni sustav.
-
-      Pozadina i SVI podaci nalaze se u istom elementu.
-      Sve pozicije ispod izražene su u POSTOCIMA.
-
-      Zato se kod smanjivanja/povećavanja cijeli certifikat
-      ponaša kao jedna cjelina.
-    */
-
-    #certificate {
-      position: relative;
-
-      width: min(100%, 1536px);
-
-      /*
-        Omjer tvoje originalne slike:
-        1536 × 832
-      */
-      aspect-ratio: 1536 / 832;
-
-      margin: 0 auto;
-
-      background-image: url("./certificate-background.png.png");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 100% 100%;
-
-      overflow: hidden;
-    }
-
-    /*
-      ZAJEDNIČKA PRAVILA
-    */
-
-    .field {
-      position: absolute;
-      margin: 0;
-      text-align: center;
-      color: #10281f;
-      line-height: 1.15;
-    }
-
-    /*
-      IME I PREZIME
-      — velika prazna crta ispod naslova CERTIFIKAT
-    */
-
-    #participantName {
-      left: 25%;
-      top: 41.0%;
-      width: 50%;
-
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(20px, 2.5vw, 40px);
-      font-weight: 700;
-      color: #47145e;
-    }
-
-    /*
-      REČENICA ISPOD IMENA
-    */
-
-    #statement {
-      left: 23%;
-      top: 47.2%;
-      width: 54%;
-
-      font-size: clamp(7px, 0.76vw, 12px);
-      color: #111;
-    }
-
-    /*
-      PODRUČJE SAVJETOVANJA
-    */
-
-    #area {
-      left: 23%;
-      top: 51.3%;
-      width: 54%;
-
-      font-size: clamp(11px, 1.15vw, 18px);
-      font-weight: 700;
-      color: #06372b;
-    }
-
-    /*
-      TEMA SAVJETOVANJA
-
-      Ima vlastiti prostor i više se NE SMIJE
-      sudarati s tri naslova ispod.
-    */
-
-    #topic {
-      left: 25%;
-      top: 55.4%;
-      width: 50%;
-
-      font-size: clamp(6px, 0.62vw, 10px);
-      line-height: 1.25;
-      color: #191919;
-    }
-
-    /*
-      TRI POLJA
-
-      Naslovi RAZDOBLJE / UKUPAN FOND / NAČIN
-      već postoje na samoj pozadinskoj slici.
-
-      Zato HTML ovdje ispisuje SAMO VRIJEDNOSTI.
-    */
-
-    #period {
-      left: 20%;
-      top: 67.3%;
-      width: 18%;
-      font-size: clamp(8px, 0.78vw, 12px);
-      font-weight: 700;
-    }
-
-    #totalHours {
-      left: 41%;
-      top: 67.3%;
-      width: 18%;
-      font-size: clamp(8px, 0.78vw, 12px);
-      font-weight: 700;
-    }
-
-    #workFormat {
-      left: 62%;
-      top: 67.3%;
-      width: 18%;
-      font-size: clamp(8px, 0.78vw, 12px);
-      font-weight: 700;
-    }
-
-    /*
-      QR
-
-      Bijeli okvir već postoji na slici.
-      QR postavljamo UNUTAR njega.
-    */
-
-    #qr {
-      position: absolute;
-
-      left: 50%;
-      top: 82.7%;
-
-      width: 7.1%;
-      aspect-ratio: 1 / 1;
-
-      transform: translate(-50%, -50%);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: white;
-      padding: 4px;
-    }
-
-    #qr img,
-    #qr canvas {
-      display: block;
-      width: 100% !important;
-      height: 100% !important;
-    }
-
-    /*
-      DONJI LIJEVI PODACI
-
-      Na pozadini već postoje:
-      Datum izdavanja:
-      Certificate ID:
-
-      Zato HTML ispisuje samo njihove vrijednosti.
-    */
-
-    #issueDate {
-      left: 26%;
-      top: 93.2%;
-      width: 11%;
-
-      text-align: left;
-      font-size: clamp(7px, 0.68vw, 11px);
-      font-weight: 700;
-      color: #111;
-    }
-
-    #certificateId {
-      left: 26%;
-      top: 96.0%;
-      width: 15%;
-
-      text-align: left;
-      font-size: clamp(6px, 0.62vw, 10px);
-      font-weight: 700;
-      color: #111;
-    }
-
-    /*
-      STATUS
-
-      Ne stavljamo ga preko teksta izdavatelja.
-    */
-
-    #status {
-      position: absolute;
-
-      right: 11%;
-      bottom: 3.5%;
-
-      padding: 5px 10px;
-
-      border: 1px solid #a57b13;
-      border-radius: 3px;
-
-      background: #e5bd4f;
-      color: #172119;
-
-      font-size: clamp(7px, 0.68vw, 11px);
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    /*
-      PORUKA AKO API NE RADI
-    */
-
-    #error {
-      display: none;
-
-      width: min(100%, 900px);
-      margin: 40px auto;
-
-      padding: 25px;
-
-      background: #fff4d6;
-      border: 1px solid #d6aa3c;
-
-      color: #3b2910;
-      text-align: center;
-      font-size: 18px;
-    }
-
-    /*
-      ISPIS
-
-      OVDJE — I SAMO OVDJE — UVODIMO A4.
-
-      Browser cijeli već složeni certifikat tretira
-      kao jednu cjelinu i smješta ga na A4 landscape.
-    */
-
-    @page {
-      size: A4 landscape;
-      margin: 0;
-    }
-
-    @media print {
-
-      html,
-      body {
-        width: 297mm;
-        height: 210mm;
-
         margin: 0 !important;
         padding: 0 !important;
-
+        width: 297mm;
+        height: 210mm;
         background: white !important;
 
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-      }
+    }
 
-      .page-title {
+    .page-title {
         display: none !important;
-      }
+    }
 
-      #error {
-        display: none !important;
-      }
-
-      #certificate {
-        width: 297mm;
-
-        /*
-          Ne određujemo zasebno visinu.
-          aspect-ratio čuva isti raspored.
-        */
-
-        margin: 0 auto;
+    .certificate {
+        width: 297mm !important;
+        margin: 0 auto !important;
 
         page-break-inside: avoid;
         break-inside: avoid;
 
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-      }
     }
-
-  </style>
+}
+</style>
 </head>
-
 
 <body>
 
-  <div class="page-title">
+<div class="page-title">
     ALIMDAR TECHNOLOGY — CERTIFICATE
-  </div>
+</div>
 
-
-  <main id="certificate">
+<main id="certificate" class="certificate">
 
     <div id="participantName" class="field"></div>
 
     <div id="statement" class="field">
-      Ovim se certifikatom evidentira sudjelovanje navedene osobe
-      u stručnom savjetovanju koje je proveo
-      <strong>Uslužni obrt Alimdar.</strong>
+        Ovim se certifikatom evidentira sudjelovanje navedene osobe
+        u stručnom savjetovanju koje je proveo
+        <strong>Uslužni obrt Alimdar.</strong>
     </div>
 
     <div id="area" class="field"></div>
@@ -367,268 +348,300 @@
 
     <div id="workFormat" class="field"></div>
 
-
     <div id="qr"></div>
-
 
     <div id="issueDate" class="field"></div>
 
     <div id="certificateId" class="field"></div>
 
-    <div id="status"></div>
+    <div id="status">PENDING</div>
 
-  </main>
+</main>
 
-
-  <div id="error">
+<div id="error">
     Certifikat trenutačno nije moguće učitati.
-  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const requestedId =
+    String(params.get("id") || "")
+    .trim()
+    .toUpperCase();
+
+const certificateElement =
+    document.getElementById("certificate");
+
+const errorElement =
+    document.getElementById("error");
 
 
-  <!--
-    QRCode biblioteka.
-    QR se generira iz stvarnog URL-a javne provjere.
-  -->
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
-  </script>
+function setText(id, value, fallback = "") {
 
+    const element =
+        document.getElementById(id);
 
-  <script>
+    if (!element) return;
 
-    /*
-      --------------------------------------------------------
-      ALIMDAR CERTIFICATE
-      --------------------------------------------------------
-
-      certificate.html?id=ALM-CON-2026-0001
-
-      ID uzimamo iz URL-a.
-    */
-
-    const params = new URLSearchParams(window.location.search);
-
-    const certificateId =
-      String(params.get("id") || "")
-        .trim()
-        .toUpperCase();
-
-
-    const certificate =
-      document.getElementById("certificate");
-
-    const errorBox =
-      document.getElementById("error");
-
-
-    /*
-      Sigurno upisivanje teksta.
-    */
-
-    function setText(id, value, fallback = "") {
-
-      const element = document.getElementById(id);
-
-      if (!element) return;
-
-      element.textContent =
+    if (
         value === null ||
         value === undefined ||
         value === ""
-          ? fallback
-          : value;
+    ) {
+        element.textContent = fallback;
+        return;
     }
 
+    element.textContent = String(value);
+}
 
-    /*
-      --------------------------------------------------------
-      UČITAVANJE PODATAKA IZ ALIMDAR API-ja
-      --------------------------------------------------------
-    */
 
-    async function loadCertificate() {
+function setStatus(value) {
 
-      if (!certificateId) {
+    const statusElement =
+        document.getElementById("status");
 
-        certificate.style.display = "none";
-        errorBox.style.display = "block";
-        errorBox.textContent =
-          "Certificate ID nije naveden.";
+    const status =
+        String(value || "PENDING")
+        .trim()
+        .toUpperCase();
+
+    statusElement.className = "";
+
+    if (status === "VALID") {
+        statusElement.classList.add("valid");
+        statusElement.textContent = "VALID";
+        return;
+    }
+
+    if (status === "REVOKED") {
+        statusElement.classList.add("revoked");
+        statusElement.textContent = "REVOKED";
+        return;
+    }
+
+    statusElement.textContent = "PENDING";
+}
+
+
+function createQR(id) {
+
+    const container =
+        document.getElementById("qr");
+
+    container.innerHTML = "";
+
+    const verificationURL =
+        `${window.location.origin}/?id=${encodeURIComponent(id)}`;
+
+    if (typeof QRCode === "undefined") {
+        container.textContent = "QR";
+        return;
+    }
+
+    new QRCode(container, {
+        text: verificationURL,
+        width: 220,
+        height: 220,
+        correctLevel: QRCode.CorrectLevel.H
+    });
+}
+
+
+async function loadCertificate() {
+
+    if (
+        !/^ALM-CON-\d{4}-\d{4,}$/.test(requestedId)
+    ) {
+
+        certificateElement.style.display = "none";
+        errorElement.style.display = "block";
+        errorElement.textContent =
+            "Certificate ID nije ispravan.";
 
         return;
-      }
+    }
 
-
-      try {
+    try {
 
         const response =
-          await fetch(
-            `/api/certificates?id=${encodeURIComponent(certificateId)}`,
-            {
-              cache: "no-store"
-            }
-          );
-
+            await fetch(
+                `/api/certificates?id=${encodeURIComponent(requestedId)}`,
+                {
+                    cache: "no-store",
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                }
+            );
 
         if (!response.ok) {
-          throw new Error(
-            `API error: ${response.status}`
-          );
+            throw new Error(
+                `API error ${response.status}`
+            );
         }
 
+        const c =
+            await response.json();
 
-        const c = await response.json();
 
-
-        /*
-          ----------------------------------------------------
-          GLAVNI PODACI
-          ----------------------------------------------------
-        */
+        /* IME */
 
         setText(
-          "participantName",
-          c.participantName
+            "participantName",
+            c.participantName,
+            "Nije evidentirano"
         );
 
 
+        /* PODRUČJE */
+
         setText(
-          "area",
-          c.area
+            "area",
+            c.area,
+            "Nije evidentirano"
         );
 
 
-        /*
-          Tema dobiva prefiks samo jednom.
-        */
+        /* TEMA */
 
         setText(
-          "topic",
-          c.topic
-            ? `Tema savjetovanja: ${c.topic}`
-            : ""
+            "topic",
+            c.topic
+                ? `Tema savjetovanja: ${c.topic}`
+                : ""
         );
 
 
-        setText(
-          "period",
-          c.date,
-          "Nije još evidentirano"
-        );
-
-
-        /*
-          API trenutačno vraća duration.
-          Ako jednog dana uvedemo totalHours,
-          ovaj kod prihvaća i njega.
-        */
+        /* RAZDOBLJE */
 
         setText(
-          "totalHours",
-          c.totalHours || c.duration,
-          "Nije još evidentirano"
-        );
-
-
-        setText(
-          "workFormat",
-          c.format,
-          "Nije još evidentirano"
-        );
-
-
-        setText(
-          "issueDate",
-          c.issueDate,
-          "Nije još izdano"
-        );
-
-
-        setText(
-          "certificateId",
-          c.certificateId || certificateId
+            "period",
+            c.date,
+            "Nije još evidentirano"
         );
 
 
         /*
-          ----------------------------------------------------
-          STATUS
-          ----------------------------------------------------
+           UKUPAN FOND SATI
+
+           Ovdje namjerno NE stavljamo dugi "duration"
+           tekst u malo polje.
+
+           Dok stvarni ukupni broj sati nije evidentiran,
+           prikazujemo samo kratku poruku.
         */
 
-        const status =
-          String(c.status || "PENDING")
-            .trim()
-            .toUpperCase();
+        if (
+            c.totalHours !== null &&
+            c.totalHours !== undefined &&
+            c.totalHours !== ""
+        ) {
 
-        setText(
-          "status",
-          status
-        );
-
-
-        /*
-          ----------------------------------------------------
-          QR PROVJERA
-          ----------------------------------------------------
-
-          QR vodi na JAVNU stranicu za provjeru,
-          a ne ponovno na certificate.html.
-        */
-
-        const verificationUrl =
-          `${window.location.origin}/?id=${encodeURIComponent(
-            c.certificateId || certificateId
-          )}`;
-
-
-        const qrContainer =
-          document.getElementById("qr");
-
-
-        qrContainer.innerHTML = "";
-
-
-        if (typeof QRCode !== "undefined") {
-
-          new QRCode(
-            qrContainer,
-            {
-              text: verificationUrl,
-              width: 180,
-              height: 180,
-              correctLevel: QRCode.CorrectLevel.H
-            }
-          );
+            setText(
+                "totalHours",
+                `${c.totalHours} sati`
+            );
 
         } else {
 
-          qrContainer.textContent =
-            "QR nije dostupan";
-
+            setText(
+                "totalHours",
+                "Nije još evidentirano"
+            );
         }
 
 
-      } catch (error) {
+        /* NAČIN ODRŽAVANJA */
 
-        console.error(
-          "ALIMDAR certificate error:",
-          error
+        setText(
+            "workFormat",
+            c.format,
+            "Nije evidentirano"
         );
 
-        certificate.style.display = "none";
 
-        errorBox.style.display = "block";
+        /* STATUS */
 
-        errorBox.textContent =
-          "Certifikat trenutačno nije moguće učitati.";
-      }
+        setStatus(c.status);
+
+
+        /*
+           DATUM IZDAVANJA
+
+           PENDING certifikat još nije izdan.
+        */
+
+        const status =
+            String(c.status || "PENDING")
+            .toUpperCase();
+
+        if (
+            status === "VALID" &&
+            c.issueDate
+        ) {
+
+            setText(
+                "issueDate",
+                c.issueDate
+            );
+
+        } else {
+
+            setText(
+                "issueDate",
+                "Nije još izdano"
+            );
+        }
+
+
+        /* CERTIFICATE ID */
+
+        const actualId =
+            c.certificateId || requestedId;
+
+        setText(
+            "certificateId",
+            actualId
+        );
+
+
+        /* QR */
+
+        createQR(actualId);
+
+
+        document.title =
+            `ALIMDAR — ${actualId}`;
+
     }
 
+    catch (error) {
 
-    loadCertificate();
+        console.error(
+            "ALIMDAR certificate error:",
+            error
+        );
 
-  </script>
+        certificateElement.style.display =
+            "none";
+
+        errorElement.style.display =
+            "block";
+
+        errorElement.textContent =
+            "Certifikat trenutačno nije moguće učitati.";
+    }
+}
+
+
+loadCertificate();
+
+</script>
 
 </body>
-</html> 
+</html>
