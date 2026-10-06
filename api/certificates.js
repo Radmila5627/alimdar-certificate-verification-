@@ -3,16 +3,19 @@
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
 
+  // CERTIFICATE ID IZ URL-a
   const id = String(req.query?.id || "")
     .trim()
     .toUpperCase();
 
+  // PROVJERA FORMATA CERTIFICATE ID-a
   if (!/^ALM-CON-\d{4}-\d{4,}$/.test(id)) {
     return res.status(400).json({
       error: "Invalid Certificate ID format"
     });
   }
 
+  // DATABASE
   const databaseUrl =
     process.env.POSTGRES_URL ||
     process.env.DATABASE_URL ||
@@ -27,6 +30,7 @@ export default async function handler(req, res) {
   try {
     const sql = neon(databaseUrl);
 
+    // ČITANJE POTVRDE IZ NEON BAZE
     const rows = await sql`
       SELECT
         certificate_id,
@@ -37,6 +41,7 @@ export default async function handler(req, res) {
         period_start,
         period_end,
         duration,
+        total_hours,
         work_format,
         issue_date,
         status,
@@ -59,6 +64,7 @@ export default async function handler(req, res) {
 
     const c = rows[0];
 
+    // FORMATIRANJE DATUMA
     const formatDate = (value) => {
       if (!value) return null;
 
@@ -71,36 +77,71 @@ export default async function handler(req, res) {
       }).format(d);
     };
 
+    // ODGOVOR JAVNOJ VERIFIKACIJSKOJ STRANICI
     return res.status(200).json({
       certificateId: c.certificate_id,
-      status: c.status || "PENDING",
-      participantName: c.participant_name,
-      issuer: c.issuer,
-      area: c.area,
-      topic: c.topic,
+
+      status:
+        c.status || "PENDING",
+
+      participantName:
+        c.participant_name,
+
+      issuer:
+        c.issuer,
+
+      area:
+        c.area,
+
+      topic:
+        c.topic,
 
       date:
         c.period_start && c.period_end
           ? `${formatDate(c.period_start)} – ${formatDate(c.period_end)}`
           : null,
 
-      duration: c.duration,
-      format: c.work_format,
-      issueDate: formatDate(c.issue_date),
+      duration:
+        c.duration,
 
-      imageCid: c.image_cid,
-      metadataCid: c.metadata_cid,
+      totalHours:
+        c.total_hours !== null &&
+        c.total_hours !== undefined
+          ? Number(c.total_hours)
+          : null,
+
+      format:
+        c.work_format,
+
+      issueDate:
+        formatDate(c.issue_date),
+
+      imageCid:
+        c.image_cid,
+
+      metadataCid:
+        c.metadata_cid,
 
       blockchain: {
-        network: c.blockchain_network || null,
-        contractAddress: c.contract_address || null,
-        tokenId: c.token_id || null,
-        txHash: c.transaction_hash || null
+        network:
+          c.blockchain_network || null,
+
+        contractAddress:
+          c.contract_address || null,
+
+        tokenId:
+          c.token_id || null,
+
+        txHash:
+          c.transaction_hash || null
       }
     });
 
   } catch (error) {
-    console.error("ALIMDAR registry error:", error);
+    console.error(
+      "ALIMDAR registry error:",
+      error
+    );
 
     return res.status(500).json({
       error: "Registry unavailable"
