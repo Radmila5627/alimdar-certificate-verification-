@@ -1,4 +1,4 @@
- import { neon } from "@neondatabase/serverless";
+import { neon } from "@neondatabase/serverless";
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     });
   }
 
-  // ADMIN AUTORIZACIJA
+  // ADMINISTRATORSKA AUTORIZACIJA
   const adminKey = process.env.ADMIN_API_KEY;
 
   const authHeader =
@@ -47,6 +47,7 @@ export default async function handler(req, res) {
     periodStart,
     periodEnd,
     duration,
+    totalHours,
     workFormat,
     issueDate,
     status,
@@ -90,26 +91,73 @@ export default async function handler(req, res) {
     });
   }
 
-  // PENDING NE SMIJE IMATI DATUM IZDAVANJA
+  // PROVJERA UKUPNOG FONDA SATI
+  let normalizedTotalHours = null;
+
+  if (
+    totalHours !== null &&
+    totalHours !== undefined &&
+    totalHours !== ""
+  ) {
+    normalizedTotalHours = Number(totalHours);
+
+    if (
+      !Number.isFinite(normalizedTotalHours) ||
+      normalizedTotalHours < 0
+    ) {
+      return res.status(400).json({
+        error: "Ukupan fond sati nije ispravan."
+      });
+    }
+  }
+
+  // VALID potvrda mora imati stvarni fond sati.
+  if (
+    status === "VALID" &&
+    normalizedTotalHours === null
+  ) {
+    return res.status(400).json({
+      error:
+        "Za VALID potvrdu obavezan je stvarni ukupan fond sati."
+    });
+  }
+
+  // VALID potvrda mora imati datum izdavanja.
+  if (
+    status === "VALID" &&
+    !issueDate
+  ) {
+    return res.status(400).json({
+      error:
+        "Za VALID potvrdu obavezan je datum izdavanja."
+    });
+  }
+
+  // PENDING potvrda nema datum izdavanja.
   const finalIssueDate =
     status === "VALID"
-      ? (issueDate || null)
+      ? issueDate
       : null;
 
   try {
+
     const sql = neon(databaseUrl);
 
-    // Automatski generira sljedeći Certificate ID.
-    // Martina već ima ALM-CON-2026-0001,
-    // pa će sljedeći stvarni zapis dobiti 0002.
+    // Baza automatski dodjeljuje sljedeći Certificate ID.
     const idRows = await sql`
       SELECT next_certificate_id() AS certificate_id
     `;
 
+    if (!idRows.length || !idRows[0].certificate_id) {
+      throw new Error(
+        "Certificate ID nije generiran."
+      );
+    }
+
     const certificateId =
       idRows[0].certificate_id;
 
-    // SPREMANJE U NEON
+    // SPREMANJE POTVRDE U NEON
     await sql`
       INSERT INTO certificates (
         certificate_id,
@@ -120,6 +168,7 @@ export default async function handler(req, res) {
         period_start,
         period_end,
         duration,
+        total_hours,
         work_format,
         issue_date,
         status,
@@ -137,6 +186,7 @@ export default async function handler(req, res) {
         ${periodStart},
         ${periodEnd},
         ${duration?.trim() || null},
+        ${normalizedTotalHours},
         ${workFormat?.trim() || null},
         ${finalIssueDate},
         ${status},
@@ -150,10 +200,12 @@ export default async function handler(req, res) {
     return res.status(201).json({
       success: true,
       certificateId: certificateId,
-      status: status
+      status: status,
+      totalHours: normalizedTotalHours
     });
 
   } catch (error) {
+
     console.error(
       "ALIMDAR admin registry error:",
       error
@@ -164,4 +216,4 @@ export default async function handler(req, res) {
         "Spremanje potvrde nije uspjelo."
     });
   }
-}
+} 
