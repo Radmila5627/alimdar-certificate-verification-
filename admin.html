@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="hr">
 <head>
   <meta charset="UTF-8">
@@ -68,6 +68,19 @@
       line-height: 1.5;
     }
 
+    .section-title {
+      margin-top: 35px;
+      margin-bottom: 8px;
+      color: #d8b85c;
+    }
+
+    .section-description {
+      margin: 0 0 18px;
+      color: #82978e;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
     label {
       display: block;
       margin: 18px 0 7px;
@@ -110,9 +123,11 @@
       gap: 18px;
     }
 
-    .section-title {
-      margin-top: 35px;
-      color: #d8b85c;
+    .field-help {
+      margin-top: 7px;
+      color: #82978e;
+      font-size: 12px;
+      line-height: 1.5;
     }
 
     button {
@@ -179,15 +194,15 @@
   <h1>Upravljanje potvrdama</h1>
 
   <p class="intro">
-    Interno administracijsko sučelje za unos potvrda o sudjelovanju
-    u stručnom savjetovanju u ALIMDAR registru.
+    Interno administracijsko sučelje za unos i evidenciju potvrda
+    o sudjelovanju u stručnom savjetovanju u ALIMDAR registru.
   </p>
 
   <div class="card">
 
     <form id="certificateForm">
 
-      <!-- ADMIN AUTORIZACIJA -->
+      <!-- ADMINISTRATORSKI PRISTUP -->
 
       <div class="security-box">
 
@@ -214,11 +229,16 @@
 
       </div>
 
-      <!-- CERTIFICATE -->
+      <!-- OSNOVNI PODACI -->
+
+      <h3 class="section-title">
+        Podaci o potvrdi
+      </h3>
 
       <div class="grid">
 
         <div>
+
           <label for="certificateId">
             Certificate ID
           </label>
@@ -228,9 +248,11 @@
             placeholder="Automatski će se dodijeliti"
             readonly
           >
+
         </div>
 
         <div>
+
           <label for="status">
             Status
           </label>
@@ -240,6 +262,7 @@
             <option value="VALID">VALID</option>
             <option value="REVOKED">REVOKED</option>
           </select>
+
         </div>
 
       </div>
@@ -262,6 +285,12 @@
         value="Uslužni obrt Alimdar"
         readonly
       >
+
+      <!-- SAVJETOVANJE -->
+
+      <h3 class="section-title">
+        Podaci o stručnom savjetovanju
+      </h3>
 
       <label for="area">
         Područje stručnog savjetovanja
@@ -313,14 +342,46 @@
 
       </div>
 
-      <label for="duration">
-        Trajanje
-      </label>
+      <div class="grid">
 
-      <input
-        id="duration"
-        placeholder="npr. 2 sata dnevno prema programu savjetovanja"
-      >
+        <div>
+
+          <label for="duration">
+            Trajanje / dinamika
+          </label>
+
+          <input
+            id="duration"
+            placeholder="npr. 2 sata dnevno prema programu savjetovanja"
+          >
+
+          <div class="field-help">
+            Opis načina i dinamike održavanja savjetovanja.
+          </div>
+
+        </div>
+
+        <div>
+
+          <label for="totalHours">
+            Ukupan fond sati
+          </label>
+
+          <input
+            id="totalHours"
+            type="number"
+            min="0"
+            step="0.5"
+            placeholder="npr. 24"
+          >
+
+          <div class="field-help">
+            Ručno unesite stvarno evidentirani ukupni broj sati.
+          </div>
+
+        </div>
+
+      </div>
 
       <label for="workFormat">
         Način održavanja
@@ -340,11 +401,21 @@
         type="date"
       >
 
+      <div class="field-help">
+        Za status PENDING datum izdavanja ostavite prazan.
+        Datum se unosi kada se potvrda stvarno izdaje.
+      </div>
+
       <!-- BLOCKCHAIN -->
 
       <h3 class="section-title">
         Blockchain podaci
       </h3>
+
+      <p class="section-description">
+        Ova polja popunjavaju se samo kada postoje stvarni blockchain
+        podaci. Ne unosite privremene ili izmišljene vrijednosti.
+      </p>
 
       <div class="grid">
 
@@ -406,8 +477,8 @@
 
   <p class="note">
     ALIMDAR interni administracijski sustav.
-    Podaci se ne spremaju izravno iz preglednika u bazu,
-    nego putem zaštićenog administratorskog API-ja.
+    Podaci se spremaju u ALIMDAR registar putem
+    zaštićenog administratorskog API-ja.
   </p>
 
 </div>
@@ -450,6 +521,15 @@ form.addEventListener("submit", async (event) => {
   const periodEnd =
     document.getElementById("periodEnd").value;
 
+  const status =
+    document.getElementById("status").value;
+
+  const issueDate =
+    document.getElementById("issueDate").value;
+
+  const totalHoursValue =
+    document.getElementById("totalHours").value;
+
 
   if (
     periodStart &&
@@ -461,6 +541,48 @@ form.addEventListener("submit", async (event) => {
     message.className = "error";
     message.textContent =
       "Datum završetka ne može biti prije datuma početka.";
+
+    return;
+  }
+
+
+  if (
+    totalHoursValue !== "" &&
+    Number(totalHoursValue) < 0
+  ) {
+
+    message.style.display = "block";
+    message.className = "error";
+    message.textContent =
+      "Ukupan fond sati ne može biti negativan.";
+
+    return;
+  }
+
+
+  if (
+    status === "VALID" &&
+    totalHoursValue === ""
+  ) {
+
+    message.style.display = "block";
+    message.className = "error";
+    message.textContent =
+      "Za izdanu VALID potvrdu unesite stvarni ukupan fond sati.";
+
+    return;
+  }
+
+
+  if (
+    status === "VALID" &&
+    !issueDate
+  ) {
+
+    message.style.display = "block";
+    message.className = "error";
+    message.textContent =
+      "Za izdanu VALID potvrdu unesite datum izdavanja.";
 
     return;
   }
@@ -504,18 +626,21 @@ form.addEventListener("submit", async (event) => {
         .value
         .trim(),
 
+    totalHours:
+      totalHoursValue === ""
+        ? null
+        : Number(totalHoursValue),
+
     workFormat:
       document.getElementById("workFormat")
         .value
         .trim(),
 
     issueDate:
-      document.getElementById("issueDate")
-        .value || null,
+      issueDate || null,
 
     status:
-      document.getElementById("status")
-        .value,
+      status,
 
     blockchainNetwork:
       document.getElementById("blockchainNetwork")
